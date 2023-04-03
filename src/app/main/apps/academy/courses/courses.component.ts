@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 
 import { AcademyCoursesService } from 'app/main/apps/academy/courses.service';
+import { UserService } from 'app/main/services/user.service';
+import { UserAuthService } from 'app/main/services/user-auth.service';
 
 @Component({
     selector   : 'academy-courses',
@@ -30,7 +32,9 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy
      * @param {AcademyCoursesService} _academyCoursesService
      */
     constructor(
-        private _academyCoursesService: AcademyCoursesService
+        private _academyCoursesService: AcademyCoursesService,
+        private userService:UserService,
+        private userAuthService:UserAuthService
     )
     {
         // Set the defaults
@@ -50,6 +54,9 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.forAll();
+        this.userAuthService.isLoggedIn();
+        this.forUser();
         // Subscribe to categories
         this._academyCoursesService.onCategoriesChanged
             .pipe(takeUntil(this._unsubscribeAll))
@@ -122,5 +129,11 @@ export class AcademyCoursesComponent implements OnInit, OnDestroy
                 return course.title.toLowerCase().includes(searchTerm);
             });
         }
+    }
+    forUser(){
+        this.userService.forAdmin().subscribe((res)=>{})
+    }
+    forAll(){
+this.userService.forAll().subscribe((res)=>{})
     }
 }

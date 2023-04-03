@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
     HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
   } from '@angular/common/http';
@@ -29,6 +29,9 @@ import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { LoginComponent } from './main/pages/authentication/login/login.component';
 import { httpInterceptorProviders } from './main/pages/helpers/http.interceptor';
+import { AuthGuard } from './main/Auth/auth.guard';
+import { AuthInterceptor } from './main/Auth/auth.intercepter';
+import { UserService } from './main/services/user.service';
 
 const appRoutes: Routes = [
     {
@@ -106,7 +109,13 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
-    providers: [httpInterceptorProviders],
+    providers: [AuthGuard,
+        {
+            provide:HTTP_INTERCEPTORS,
+            useClass:AuthInterceptor,
+            multi:true
+        },
+    UserService],
     bootstrap   : [
         AppComponent
     ]
