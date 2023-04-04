@@ -27,6 +27,7 @@ import { EcommerceOrdersComponent } from 'app/main/apps/e-commerce/orders/orders
 import { EcommerceOrdersService } from 'app/main/apps/e-commerce/orders/orders.service';
 import { EcommerceOrderComponent } from 'app/main/apps/e-commerce/order/order.component';
 import { EcommerceOrderService } from 'app/main/apps/e-commerce/order/order.service';
+import { ProductDeleteDialogBoxComponent } from 'app/main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
 
 const routes: Routes = [
     {
@@ -44,7 +45,7 @@ const routes: Routes = [
         }
     },
     {
-        path     : 'products/:id/:handle',
+        path     : 'products/:id',
         component: EcommerceProductComponent,
         resolve  : {
             data: EcommerceProductService
@@ -103,7 +104,8 @@ const routes: Routes = [
         EcommerceProductService,
         EcommerceOrdersService,
         EcommerceOrderService
-    ]
+    ],
+   
 })
 export class EcommerceModule
 {

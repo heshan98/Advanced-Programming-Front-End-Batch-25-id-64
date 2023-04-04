@@ -14,11 +14,13 @@ import { AcademyCourseComponent } from 'app/main/apps/academy/course/course.comp
 import { AcademyCoursesService } from 'app/main/apps/academy/courses.service';
 import { AcademyCourseService } from 'app/main/apps/academy/course.service';
 import { FuseSidebarModule } from '@fuse/components';
+import { AuthGuard } from 'app/main/Auth/auth.guard';
 
 const routes = [
     {
         path     : 'courses',
         component: AcademyCoursesComponent,
+        canActivate:[AuthGuard],data:{roles:'ROLE_ADMIN'},
         resolve  : {
             academy: AcademyCoursesService
         }

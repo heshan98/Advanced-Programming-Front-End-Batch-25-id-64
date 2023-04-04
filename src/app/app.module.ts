@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
     HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
   } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import 'hammerjs';
 
@@ -29,6 +30,10 @@ import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { LoginComponent } from './main/pages/authentication/login/login.component';
 import { httpInterceptorProviders } from './main/pages/helpers/http.interceptor';
+import { AuthGuard } from './main/Auth/auth.guard';
+import { AuthInterceptor } from './main/Auth/auth.intercepter';
+import { UserService } from './main/services/user.service';
+import { ProductDeleteDialogBoxComponent } from './main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
 
 const appRoutes: Routes = [
     {
@@ -64,10 +69,16 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         LoginComponent,
+        ProductDeleteDialogBoxComponent
+        
     ],
+
     imports     : [
         BrowserModule,
         MatSnackBarModule,
+        MatDialogModule,
+        
+       
        
         BrowserAnimationsModule,
         HttpClientModule,
@@ -106,10 +117,17 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
-    providers: [httpInterceptorProviders],
+    providers: [AuthGuard,
+        {
+            provide:HTTP_INTERCEPTORS,
+            useClass:AuthInterceptor,
+            multi:true
+        },
+    UserService],
     bootstrap   : [
         AppComponent
-    ]
+    ],
+    entryComponents:[ProductDeleteDialogBoxComponent]
 })
 export class AppModule
 {

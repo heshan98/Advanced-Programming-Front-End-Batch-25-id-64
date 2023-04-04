@@ -24,7 +24,8 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
             provide : RouterStateSerializer,
             useClass: CustomSerializer
         }
-    ]
+    ],
+    
 })
 
 export class AppStoreModule

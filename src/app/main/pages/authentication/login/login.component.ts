@@ -4,8 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { UserService } from 'app/main/services/user.service';
-import { StorageService } from '../../../services/storage.service';
+// import { StorageService } from '../../../services/storage.service';
 import { MatSnackBar } from '@angular/material';
+import { UserAuthService } from 'app/main/services/user-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'login',
@@ -33,8 +35,10 @@ export class LoginComponent implements OnInit
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private userService:UserService,
-        private storageService: StorageService,
+        // private storageService: StorageService,
         private matSnackBar: MatSnackBar,
+        private userAuthService:UserAuthService,
+        private router:Router
     )
     {
         //Configure the layout
@@ -65,50 +69,31 @@ export class LoginComponent implements OnInit
      */
     ngOnInit(): void
     {
-        if (this.storageService.isLoggedIn()) {
-            this.isLoggedIn = true;
-            this.roles = this.storageService.getUser().roles;
-          }
-
+       
         this.loginForm = this._formBuilder.group({
             email   : ['', [Validators.required]],
             password: ['', Validators.required]
         });
-    }
+    } 
     submit(){
     //    alert(this.loginForm.get(['email']).value) 
        const user=this.loginForm.get(['email']).value
        const password=this.loginForm.get(['password']).value
-       this.userService.login(user,password).subscribe({
-        next: data => {
-            this.storageService.saveUser(data);
-            console.log(data)
-    
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            this.roles = this.storageService.getUser().roles;
-            console.log(this.roles[0])
-            if(this.roles[0]==='ROLE_ADMIN'){
-             //  alert('hi')
+       this.userService.login(user,password).subscribe(res=>{
+        // res.accessToken
+        console.log(res)
+        this.userAuthService.setLoggedId(res.id)
+        this.userAuthService.setRoles(res.roles[0])
+        this.userAuthService.setToken(res.accessToken)
+        const role=res.roles[0]
+        if(role==='ROLE_ADMIN'){
+            this.router.navigate(['/apps/e-commerce/products' ]);
 
-            }
-            // this.reloadPage();
-          },
-          error: err => {
-            this.errorMessage = err.error.message;
-            if (this.errorMessage) {
-                this.matSnackBar.open(
-                  "This Account does not exist", 'OK', {
-                  verticalPosition: 'top',
-                  duration: 4000
-                })
-                return
-              }
-            console.log(this.errorMessage)
-            this.isLoginFailed = true;
-          }
-        });
-      }
+        }
+
+       })
+    }
+     
     reloadPage(): void {
         window.location.reload();
       }
