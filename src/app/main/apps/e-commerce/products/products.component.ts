@@ -26,7 +26,7 @@ export class EcommerceProductsComponent implements OnInit
 {
    listProducts!:IProduct[];
    dataSource:any;
-    displayedColumns = ['id','name','price'];
+    displayedColumns = ['id','name','description','price',];
 
     @ViewChild(MatPaginator, {static: true})
     paginator: MatPaginator;

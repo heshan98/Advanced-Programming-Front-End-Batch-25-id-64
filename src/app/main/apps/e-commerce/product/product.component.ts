@@ -10,162 +10,119 @@ import { FuseUtils } from '@fuse/utils';
 
 import { Product } from 'app/main/apps/e-commerce/product/product.model';
 import { EcommerceProductService } from 'app/main/apps/e-commerce/product/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { productsService } from 'app/main/services/product.service';
+import { IProduct } from 'app/main/services/models/product-model';
+import { MatDialog } from '@angular/material';
+import { ProductDeleteDialogBoxComponent } from 'app/main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
 
 @Component({
-    selector     : 'e-commerce-product',
-    templateUrl  : './product.component.html',
-    styleUrls    : ['./product.component.scss'],
+    selector: 'e-commerce-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class EcommerceProductComponent implements OnInit, OnDestroy
-{
+export class EcommerceProductComponent implements OnInit {
+    productId;
     product: Product;
     pageType: string;
     productForm: FormGroup;
+    editForm = this._formBuilder.group({
+        id: [],
+        productDescription: [],
+        productName: [],
+        category: [],
+        image1: [],
+        image2: [],
+        image3: [],
+        price: [],
+        quantity: []
 
-    // Private
-    private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {EcommerceProductService} _ecommerceProductService
-     * @param {FormBuilder} _formBuilder
-     * @param {Location} _location
-     * @param {MatSnackBar} _matSnackBar
-     */
+
+
+    });
     constructor(
-        private _ecommerceProductService: EcommerceProductService,
+
         private _formBuilder: FormBuilder,
-        private _location: Location,
-        private _matSnackBar: MatSnackBar
-    )
-    {
-        // Set the default
-        this.product = new Product();
+        protected activatedRoute: ActivatedRoute,
+        public dialog: MatDialog,
+        private _matSnackBar: MatSnackBar,
+        private productService: productsService
+    ) {
 
-        // Set the private defaults
-        this._unsubscribeAll = new Subject();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Subscribe to update product on changes
-        this._ecommerceProductService.onProductChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(product => {
+    ngOnInit(): void {
+        this.activatedRoute.params.subscribe(res => {
+           this.productId= (res['id'])
+            this.productService.getProductsById(res['id']).subscribe(res => {
+               // alert(res)
+                this.updateForm(res)
 
-                if ( product )
-                {
-                    this.product = new Product(product);
-                    this.pageType = 'edit';
-                }
-                else
-                {
-                    this.pageType = 'new';
-                    this.product = new Product();
-                }
+            })
 
-                this.productForm = this.createProductForm();
-            });
+        })
+
     }
 
-    /**
-     * On destroy
-     */
-    ngOnDestroy(): void
-    {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
-    }
+    updateForm(product: IProduct) {
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Create product form
-     *
-     * @returns {FormGroup}
-     */
-    createProductForm(): FormGroup
-    {
-        return this._formBuilder.group({
-            id              : [this.product.id],
-            name            : [this.product.name],
-            handle          : [this.product.handle],
-            description     : [this.product.description],
-            categories      : [this.product.categories],
-            tags            : [this.product.tags],
-            images          : [this.product.images],
-            priceTaxExcl    : [this.product.priceTaxExcl],
-            priceTaxIncl    : [this.product.priceTaxIncl],
-            taxRate         : [this.product.taxRate],
-            comparedPrice   : [this.product.comparedPrice],
-            quantity        : [this.product.quantity],
-            sku             : [this.product.sku],
-            width           : [this.product.width],
-            height          : [this.product.height],
-            depth           : [this.product.depth],
-            weight          : [this.product.weight],
-            extraShippingFee: [this.product.extraShippingFee],
-            active          : [this.product.active]
+        this.editForm.patchValue({
+            id: product.id,
+            productDescription: product.productDescription,
+            productName: product.productName,
+            price: product.price,
+            image1: product.image1,
+            image2: product.image2,
+            image3: product.image3,
+            quantity: product.quantity
         });
+
     }
+    private createFromForm(): IProduct {
+        return {
+    
+          ...new Product(),
+          id: this.editForm.get(['id']).value,
+          productName:this.editForm.get(['productName']).value,
+          productDescription:this.editForm.get(['productDescription']).value,
+          quantity:this.editForm.get(['quantity']).value,
+          price:this.editForm.get(['price']).value,
+         };
+      }
 
-    /**
-     * Save product
-     */
-    saveProduct(): void
-    {
-        const data = this.productForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.name);
+submit(){
+    const submit=this.createFromForm();
+this.productService.create(submit).subscribe(res=>{
 
-        this._ecommerceProductService.saveProduct(data)
-            .then(() => {
+})
+}
 
-                // Trigger the subscription with new data
-                this._ecommerceProductService.onProductChanged.next(data);
+deleteProduct() {
+    
 
-                // Show the success message
-                this._matSnackBar.open('Product saved', 'OK', {
-                    verticalPosition: 'top',
-                    duration        : 2000
-                });
-            });
-    }
+    const dialogRef2 = this.dialog.open(ProductDeleteDialogBoxComponent, {
+      width: '40%',
+      height: "25%",
+      data: {},
+    })
+    dialogRef2.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result == true) {
+       this.productService.delete(this.productId).subscribe(res=>{
+        
+       })
 
-    /**
-     * Add product
-     */
-    addProduct(): void
-    {
-        const data = this.productForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.name);
+      }
+      else {
+        
+        //nothing
+      }
 
-        this._ecommerceProductService.addProduct(data)
-            .then(() => {
+    })
+  }
 
-                // Trigger the subscription with new data
-                this._ecommerceProductService.onProductChanged.next(data);
-
-                // Show the success message
-                this._matSnackBar.open('Product added', 'OK', {
-                    verticalPosition: 'top',
-                    duration        : 2000
-                });
-
-                // Change the location with new one
-                this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
-            });
-    }
 }

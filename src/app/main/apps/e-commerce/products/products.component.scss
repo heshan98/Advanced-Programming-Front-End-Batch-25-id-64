@@ -80,22 +80,14 @@ e-commerce-products {
             flex: 0 1 84px;
         }
 
-        .mat-column-image {
-            flex: 0 1 84px;
+      
 
-            .product-image {
-                width: 52px;
-                height: 52px;
-                border: 1px solid rgba(0, 0, 0, .12);
-            }
+        .mat-column-name {
+            flex: 0 1 200px;
         }
 
-        .mat-column-category {
-            flex: 0 1 240px;
-        }
-
-        .mat-column-price {
-            flex: 0 1 160px;
+        .mat-column-description {
+            flex: 0 1 560px;
         }
 
         .mat-column-quantity {

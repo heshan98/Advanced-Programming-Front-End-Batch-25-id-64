@@ -22,6 +22,7 @@ import { SearchClassicModule } from 'app/main/pages/search/classic/search-classi
 import { SearchModernModule } from 'app/main/pages/search/modern/search-modern.module';
 import { FaqModule } from 'app/main/pages/faq/faq.module';
 import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-base.module';
+import { ProductDeleteDialogBoxComponent } from './product-delete-dialog-box/product-delete-dialog-box.component';
 
 @NgModule({
     imports: [
@@ -67,7 +68,11 @@ import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-bas
 
         // Knowledge base
         KnowledgeBaseModule
-    ] 
+    ],
+    declarations: [ProductDeleteDialogBoxComponent] ,
+    entryComponents:[ProductDeleteDialogBoxComponent]
+
+   
 })
 export class PagesModule
 {

@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import 'hammerjs';
 
@@ -32,6 +33,7 @@ import { httpInterceptorProviders } from './main/pages/helpers/http.interceptor'
 import { AuthGuard } from './main/Auth/auth.guard';
 import { AuthInterceptor } from './main/Auth/auth.intercepter';
 import { UserService } from './main/services/user.service';
+import { ProductDeleteDialogBoxComponent } from './main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
 
 const appRoutes: Routes = [
     {
@@ -67,10 +69,16 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         LoginComponent,
+        ProductDeleteDialogBoxComponent
+        
     ],
+
     imports     : [
         BrowserModule,
         MatSnackBarModule,
+        MatDialogModule,
+        
+       
        
         BrowserAnimationsModule,
         HttpClientModule,
@@ -118,7 +126,8 @@ const appRoutes: Routes = [
     UserService],
     bootstrap   : [
         AppComponent
-    ]
+    ],
+    entryComponents:[ProductDeleteDialogBoxComponent]
 })
 export class AppModule
 {

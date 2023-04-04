@@ -65,6 +65,13 @@
                         <p class="text-truncate">{{product.productName}}</p>
                     </mat-cell>
                 </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">{{product.productDescription}}</p>
+                    </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="price">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
@@ -123,7 +130,7 @@
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle">
+                         [routerLink]="'/apps/e-commerce/products/'+product.id">
                 </mat-row>
 
             </mat-table>
