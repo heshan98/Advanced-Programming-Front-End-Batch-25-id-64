@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import {
     HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
   } from '@angular/common/http';
@@ -15,13 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
+import { MatTableModule } from '@angular/material/table';
 import 'hammerjs';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 import { fuseConfig } from 'app/fuse-config';
 import { FormsModule } from '@angular/forms';
 import { FakeDbService } from 'app/fake-db/fake-db.service';
@@ -34,6 +36,13 @@ import { AuthGuard } from './main/Auth/auth.guard';
 import { AuthInterceptor } from './main/Auth/auth.intercepter';
 import { UserService } from './main/services/user.service';
 import { ProductDeleteDialogBoxComponent } from './main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
+import { CustomerRegistrationComponent } from './main/pages/authentication/customer-registration/customer-registration.component';
+import { RegisterComponent } from './main/pages/authentication/register/register.component';
+import { CustomerManagementComponent } from './main/pages/customer-management/customer-management.component';
+import { CustomerDetailsComponent } from './main/pages/customer-details/customer-details.component';
+import { EcommerceProductComponent } from './main/apps/e-commerce/product/product.component';
+import { EcommerceProductsComponent } from './main/apps/e-commerce/products/products.component';
+import { AnalyticsDashboardComponent } from './main/apps/dashboards/analytics/analytics.component';
 
 const appRoutes: Routes = [
     {
@@ -52,6 +61,46 @@ const appRoutes: Routes = [
         path        : 'documentation',
         loadChildren: './main/documentation/documentation.module#DocumentationModule'
     },
+
+
+
+
+    {path: 'test/test',
+    component: RegisterComponent,} ,
+    {path: 'management/customers',
+    component: CustomerManagementComponent,} ,
+
+    {path: 'management/customersDetails/:id',
+    component: CustomerDetailsComponent,} ,
+
+    {path:'product/:id',component:EcommerceProductComponent},
+
+    {path:'products',component:EcommerceProductsComponent},
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {
         path        : 'angular-material-elements',
         loadChildren: './main/angular-material-elements/angular-material-elements.module#AngularMaterialElementsModule'
@@ -69,7 +118,13 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         LoginComponent,
-        ProductDeleteDialogBoxComponent
+        ProductDeleteDialogBoxComponent,
+        CustomerRegistrationComponent,
+        RegisterComponent,
+        CustomerManagementComponent,
+        CustomerDetailsComponent,
+        EcommerceProductComponent,
+        EcommerceProductsComponent
         
     ],
 
@@ -77,6 +132,10 @@ const appRoutes: Routes = [
         BrowserModule,
         MatSnackBarModule,
         MatDialogModule,
+        MatDatepickerModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatTabsModule,
         
        
        
@@ -93,6 +152,8 @@ const appRoutes: Routes = [
         // Material moment date module
         MatMomentDateModule,
         RouterModule.forRoot([
+           {path: 'test/test',
+           component: CustomerRegistrationComponent,} ,
             // {path: 'crisis-list', component: CrisisListComponent},
             // {path: 'heroes-list', component: HeroesListComponent},
             // {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},

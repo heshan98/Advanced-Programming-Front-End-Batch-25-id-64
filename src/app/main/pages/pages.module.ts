@@ -13,6 +13,7 @@ import { MailConfirmModule } from 'app/main/pages/authentication/mail-confirm/ma
 // import { ComingSoonModule } from 'app/main/pages/coming-soon/coming-soon.module';
 // import { Error404Module } from 'app/main/pages/errors/404/error-404.module';
 // import { Error500Module } from 'app/main/pages/errors/500/error-500.module';
+import { RouterModule, Routes } from '@angular/router';
 import { InvoiceModernModule } from 'app/main/pages/invoices/modern/modern.module';
 import { InvoiceCompactModule } from 'app/main/pages/invoices/compact/compact.module';
 import { MaintenanceModule } from 'app/main/pages/maintenance/maintenence.module';
@@ -23,6 +24,10 @@ import { SearchModernModule } from 'app/main/pages/search/modern/search-modern.m
 import { FaqModule } from 'app/main/pages/faq/faq.module';
 import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-base.module';
 import { ProductDeleteDialogBoxComponent } from './product-delete-dialog-box/product-delete-dialog-box.component';
+import { CustomerRegistrationComponent } from './authentication/customer-registration/customer-registration.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { CustomerManagementComponent } from './customer-management/customer-management.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
     imports: [
@@ -67,9 +72,25 @@ import { ProductDeleteDialogBoxComponent } from './product-delete-dialog-box/pro
         FaqModule,
 
         // Knowledge base
-        KnowledgeBaseModule
+        KnowledgeBaseModule,
+        RouterModule.forChild([
+
+    
+            {
+
+                path: 'test/test',
+                component: CustomerRegistrationComponent,
+
+            },
+           
+        ])
+       
+
+      
+
     ],
-    declarations: [ProductDeleteDialogBoxComponent] ,
+    
+    declarations: [ProductDeleteDialogBoxComponent, CustomerRegistrationComponent, CustomerManagementComponent, CustomerDetailsComponent] ,
     entryComponents:[ProductDeleteDialogBoxComponent]
 
    

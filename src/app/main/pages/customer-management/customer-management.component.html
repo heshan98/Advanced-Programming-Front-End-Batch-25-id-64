@@ -16,10 +16,10 @@
             <div class="logo mb-24 mb-md-0"
                  fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    shopping_basket
+                    supervised_user_circle
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Product
+                    Customer Management
                 </span>
             </div>
             <!-- / APP TITLE -->
@@ -59,24 +59,38 @@
                         <p class="text-truncate">{{product.id}}</p>
                     </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">{{product.email}}</p>
+                    </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.productName}}</p>
+                        <p class="text-truncate">{{product.name}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="description">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Date Of Birth</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.productDescription}}</p>
+                        <p class="text-truncate">{{product.dateOfBirth  | date: "dd/MM/yyyy"}}</p>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="price">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Budget</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
-                            {{product.price | currency:'USD':'symbol'}}
+                            {{product.budget | currency:'USD':'symbol'}}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Used Amount</mat-header-cell>
+                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
+                        <p class="price text-truncate">
+                            {{product.usedAmount }}
                         </p>
                     </mat-cell>
                 </ng-container>
@@ -130,7 +144,6 @@
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         (click)="id(product.id)"
                          [routerLink]="'/apps/e-commerce/products/'+product.id">
                 </mat-row>
 
@@ -148,3 +161,4 @@
     </div>
     <!-- / CENTER -->
 </div>
+

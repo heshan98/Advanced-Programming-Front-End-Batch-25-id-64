@@ -60,13 +60,7 @@ export class LoginComponent implements OnInit
         };
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
+   
     ngOnInit(): void
     {
        
@@ -87,7 +81,7 @@ export class LoginComponent implements OnInit
         this.userAuthService.setToken(res.accessToken)
         const role=res.roles[0]
         if(role==='ROLE_ADMIN'){
-            this.router.navigate(['/apps/e-commerce/products' ]);
+            this.router.navigate(['/products' ]);
 
         }
 

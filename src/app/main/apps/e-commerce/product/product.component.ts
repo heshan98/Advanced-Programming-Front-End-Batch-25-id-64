@@ -39,9 +39,6 @@ export class EcommerceProductComponent implements OnInit {
         price: [],
         quantity: []
 
-
-
-
     });
     constructor(
 

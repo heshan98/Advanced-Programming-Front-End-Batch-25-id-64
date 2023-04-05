@@ -14,6 +14,7 @@ import { productsService } from 'app/main/services/product.service';
 import { IProduct } from 'app/main/services/models/product-model';
 import { UserService } from 'app/main/services/user.service';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'e-commerce-products',
@@ -40,7 +41,8 @@ export class EcommerceProductsComponent implements OnInit
  
 
     constructor(private productService:productsService,
-        private userServive:UserService
+        private userServive:UserService,
+        private router:Router
         
     )
     {
@@ -60,6 +62,11 @@ export class EcommerceProductsComponent implements OnInit
             console.log(this.listProducts)
 
         }) 
+    }
+    id(id){
+        this.router.navigate(['/product/'+id ]);
+    
+        console.log(id)
     }
 }
 
