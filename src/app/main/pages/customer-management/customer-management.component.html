@@ -34,11 +34,11 @@
             <!-- / SEARCH -->
 
             <!-- ADD BUTTON -->
-            <button mat-raised-button
+            <!-- <button mat-raised-button
                     [routerLink]="'/apps/e-commerce/products/new'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
                 <span>ADD NEW PRODUCT</span>
-            </button>
+            </button> -->
             <!-- / ADD BUTTON -->
 
         </div>
@@ -82,7 +82,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Budget</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
-                            {{product.budget | currency:'USD':'symbol'}}
+                            LKR {{product.budget}}
                         </p>
                     </mat-cell>
                 </ng-container>
@@ -144,7 +144,7 @@
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/products/'+product.id">
+                         [routerLink]="'id/'+product.id">
                 </mat-row>
 
             </mat-table>

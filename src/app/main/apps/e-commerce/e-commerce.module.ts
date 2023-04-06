@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
+import {MatGridList, MatGridListModule} from '@angular/material/grid-list';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
@@ -28,6 +29,7 @@ import { EcommerceOrdersService } from 'app/main/apps/e-commerce/orders/orders.s
 import { EcommerceOrderComponent } from 'app/main/apps/e-commerce/order/order.component';
 import { EcommerceOrderService } from 'app/main/apps/e-commerce/order/order.service';
 import { ProductDeleteDialogBoxComponent } from 'app/main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
+import { ProjectDashboardComponent } from '../dashboards/project/project.component';
 
 const routes: Routes = [
     {
@@ -72,7 +74,8 @@ const routes: Routes = [
         EcommerceProductsComponent,
         EcommerceProductComponent,
         EcommerceOrdersComponent,
-        EcommerceOrderComponent
+        EcommerceOrderComponent,
+       
     ],
     imports     : [
         RouterModule.forChild(routes),

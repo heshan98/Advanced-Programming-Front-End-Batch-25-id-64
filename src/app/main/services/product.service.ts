@@ -5,8 +5,7 @@ import { UserAuthService } from './user-auth.service';
 import { IProduct } from './models/product-model';
 
 
-const PATH_OF_API = "http://localhost:8080/api/auth/"
-const PATH_OF_TEST="http://localhost:8080/api/test/"
+
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' },)
 };

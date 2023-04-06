@@ -45,21 +45,7 @@ public getProducts():Observable<any>{
           responseType:'text'
       })
    }
-    // public roleMatch(allowedRoles): boolean {
-    //     let isMatch = false
-    //     const userRoles:[] = this.userAuthService.getRoles();
-    //     console.log(this.userAuthService.getRoles(),'alut')
-    //     if (userRoles != null && userRoles) {
-            
-    //                 if (userRoles === allowedRoles) {
-    //                     isMatch = true
-    //                     return isMatch;
-    //                 } else {
-    //                     return isMatch; 
-    //                 }
-    //             }
-        
-    // }
+
 
     public roleMatch(allowedRoles): boolean {
         let isMatch = false
@@ -75,6 +61,22 @@ public getProducts():Observable<any>{
                     }
         }
     }
+
+        // public roleMatch(allowedRoles): boolean {
+    //     let isMatch = false
+    //     const userRoles:[] = this.userAuthService.getRoles();
+    //     console.log(this.userAuthService.getRoles(),'alut')
+    //     if (userRoles != null && userRoles) {
+            
+    //                 if (userRoles === allowedRoles) {
+    //                     isMatch = true
+    //                     return isMatch;
+    //                 } else {
+    //                     return isMatch; 
+    //                 }
+    //             }
+        
+    // }
 
 
 }

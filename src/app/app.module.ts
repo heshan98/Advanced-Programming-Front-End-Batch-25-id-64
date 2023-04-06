@@ -23,6 +23,7 @@ import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import { fuseConfig } from 'app/fuse-config';
 import { FormsModule } from '@angular/forms';
@@ -43,6 +44,8 @@ import { CustomerDetailsComponent } from './main/pages/customer-details/customer
 import { EcommerceProductComponent } from './main/apps/e-commerce/product/product.component';
 import { EcommerceProductsComponent } from './main/apps/e-commerce/products/products.component';
 import { AnalyticsDashboardComponent } from './main/apps/dashboards/analytics/analytics.component';
+import { MatGridList, MatGridListModule } from '@angular/material';
+import { ProjectDashboardComponent } from './main/apps/dashboards/project/project.component';
 
 const appRoutes: Routes = [
     {
@@ -70,7 +73,7 @@ const appRoutes: Routes = [
     {path: 'management/customers',
     component: CustomerManagementComponent,} ,
 
-    {path: 'management/customersDetails/:id',
+    {path: 'management/customers/id/:id',
     component: CustomerDetailsComponent,} ,
 
     {path:'product/:id',component:EcommerceProductComponent},
@@ -124,7 +127,8 @@ const appRoutes: Routes = [
         CustomerManagementComponent,
         CustomerDetailsComponent,
         EcommerceProductComponent,
-        EcommerceProductsComponent
+        EcommerceProductsComponent,
+    
         
     ],
 
@@ -136,6 +140,7 @@ const appRoutes: Routes = [
         MatTableModule,
         MatPaginatorModule,
         MatTabsModule,
+
         
        
        

@@ -35,7 +35,7 @@
 
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/apps/e-commerce/products/new'"
+                    [routerLink]="'/product/new'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
                 <span>ADD NEW PRODUCT</span>
             </button>
@@ -76,7 +76,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Price</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-xs>
                         <p class="price text-truncate">
-                            {{product.price | currency:'USD':'symbol'}}
+                            LKR {{product.price}}
                         </p>
                     </mat-cell>
                 </ng-container>
