@@ -19,7 +19,7 @@ const routes = [
     {
         path        : 'mail-ngrx',
         loadChildren: './mail-ngrx/mail.module#MailNgrxModule'
-    },
+    }, 
     {
         path        : 'chat',
         loadChildren: './chat/chat.module#ChatModule'
