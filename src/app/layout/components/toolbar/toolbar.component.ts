@@ -145,25 +145,14 @@ export class ToolbarComponent implements OnInit, OnDestroy
      *
      * @param value
      */
-    search(value): void
-    {
-        // Do your search here...
-        console.log(value);
-    }
+   
 
     /**
      * Set the language
      *
      * @param lang
      */
-    setLanguage(lang): void
-    {
-        // Set the selected language for the toolbar
-        this.selectedLanguage = lang;
-
-        // Use the selected language for translations
-        this._translateService.use(lang.id);
-    }
+ 
     public logout(){
 this.userAuthService.clear();
 this.router.navigate(['/authentication/login' ]);

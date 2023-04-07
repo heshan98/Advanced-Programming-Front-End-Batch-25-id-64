@@ -27,7 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import { fuseConfig } from 'app/fuse-config';
 import { FormsModule } from '@angular/forms';
-import { FakeDbService } from 'app/fake-db/fake-db.service';
+
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
@@ -37,7 +37,7 @@ import { AuthGuard } from './main/Auth/auth.guard';
 import { AuthInterceptor } from './main/Auth/auth.intercepter';
 import { UserService } from './main/services/user.service';
 import { ProductDeleteDialogBoxComponent } from './main/pages/product-delete-dialog-box/product-delete-dialog-box.component';
-import { CustomerRegistrationComponent } from './main/pages/authentication/customer-registration/customer-registration.component';
+
 import { RegisterComponent } from './main/pages/authentication/register/register.component';
 import { CustomerManagementComponent } from './main/pages/customer-management/customer-management.component';
 import { CustomerDetailsComponent } from './main/pages/customer-details/customer-details.component';
@@ -93,7 +93,7 @@ const appRoutes: Routes = [
 
 
 
-
+ 
 
 
 
@@ -122,7 +122,7 @@ const appRoutes: Routes = [
         AppComponent,
         LoginComponent,
         ProductDeleteDialogBoxComponent,
-        CustomerRegistrationComponent,
+     
         RegisterComponent,
         CustomerManagementComponent,
         CustomerDetailsComponent,
@@ -149,16 +149,11 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
 
         TranslateModule.forRoot(),
-        InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
-            passThruUnknownUrl: true
-        }),
-
+       
         // Material moment date module
         MatMomentDateModule,
         RouterModule.forRoot([
-           {path: 'test/test',
-           component: CustomerRegistrationComponent,} ,
+         
             // {path: 'crisis-list', component: CrisisListComponent},
             // {path: 'heroes-list', component: HeroesListComponent},
             // {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
