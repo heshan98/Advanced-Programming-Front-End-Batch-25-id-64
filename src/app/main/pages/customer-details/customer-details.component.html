@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/products'">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/management/customers'">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
@@ -31,7 +31,7 @@
                         New Product
                     </div>
                     <div class="subtitle secondary-text">
-                        <span>Product Detail</span>
+                        <span>Customer details</span>
                     </div>
                 </div>
             </div>
@@ -68,34 +68,35 @@
                             <div class="tab-content p-24" fusePerfectScrollbar>
 
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Product Name</mat-label>
-                                    <input matInput placeholder="Product Name"
+                                    <mat-label>email</mat-label>
+                                    <input matInput placeholder="email"
                                            name="name"
-                                           formControlName="productName"
-                                           required>
+                                           formControlName="email"
+                                           required
+                                           readonly>
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Product Description</mat-label>
-                                    <textarea matInput placeholder="Product Description"
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name"
                                               name="description"
-                                              formControlName="productDescription"
-                                              rows="5">
-                                    </textarea>
+                                              formControlName="name"
+                                              />
+                           
                                 </mat-form-field>
                                 
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Available Quantity</mat-label>
-                                    <input matInput placeholder="Available Quantity"
+                                    <mat-label>Budget</mat-label>
+                                    <input matInput placeholder="Budget"
                                            name="name"
-                                           formControlName="quantity"
+                                           formControlName="budget"
                                            required>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Price</mat-label>
-                                    <input matInput placeholder="Price"
+                                    <mat-label>Date Of Birth</mat-label>
+                                    <input matInput placeholder="Date Of Birth"
                                            name="name"
-                                           formControlName="price"
+                                           formControlName="dateOfBirth"
                                            required>
                                 </mat-form-field>
 
@@ -264,3 +265,4 @@
     <!-- / CENTER -->
 
 </div>
+

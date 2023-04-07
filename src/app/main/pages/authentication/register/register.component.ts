@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/internal/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { IRegister, Register } from 'app/main/services/models/register-model';
+import { registerService } from 'app/main/services/register.service';
 
 @Component({
     selector     : 'register',
@@ -22,7 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private registerService:registerService
     )
     {
         // Configure the layout
@@ -43,28 +46,24 @@ export class RegisterComponent implements OnInit, OnDestroy
             }
         };
 
-        // Set the private defaults
+       
         this._unsubscribeAll = new Subject();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
+   
     ngOnInit(): void
     {
         this.registerForm = this._formBuilder.group({
             name           : ['', Validators.required],
             email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]],
+            budget:['', Validators.max(18000)],
+            dateOfBirth:[]
+ 
         });
 
-        // Update the validity of the 'passwordConfirm' field
-        // when the 'password' field changes
+       
         this.registerForm.get('password').valueChanges
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
@@ -72,15 +71,41 @@ export class RegisterComponent implements OnInit, OnDestroy
             });
     }
 
-    /**
-     * On destroy
-     */
+    private createFromForm(): IRegister {
+        return {
+    
+          ...new Register(),
+       
+         email: this.registerForm.get(['email']).value,
+         name:this.registerForm.get(['name']).value,
+         dateOfBirth:this.registerForm.get(['dateOfBirth']).value,
+        password:this.registerForm.get(['password']).value,
+         budget:this.registerForm.get(['budget']).value,
+        
+         };
+      }
+      submit(){
+        const submit=this.createFromForm();
+        this.registerService.create(submit).subscribe(res=>{
+
+        })
+      }
+
+
+
+
+
+
+
+
+
     ngOnDestroy(): void
     {
-        // Unsubscribe from all subscriptions
+       
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
+
 }
 
 /**
@@ -115,4 +140,6 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
     }
 
     return {passwordsNotMatching: true};
+
+    
 };

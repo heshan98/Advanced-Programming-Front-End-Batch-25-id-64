@@ -14,24 +14,24 @@ const httpOptions = {
     providedIn: 'root'
 })
 
-export class productsService {
+export class registerService {
 
 
     constructor(private httpclient: HttpClient,
         private userAuthService: UserAuthService) { }
 
 
-public getProducts():Observable<any>{
-    return this.httpclient.get('http://localhost:8080/api/product/getProducts',httpOptions)
+public getCustomers():Observable<any>{
+    return this.httpclient.get('http://localhost:8080/api/customers/getCustomers',httpOptions)
 }
-public getProductsById(id:any):Observable<any>{
-    return this.httpclient.get(`http://localhost:8080/api/product/getProducts/${id}`)
+public getCustomersById(id:any):Observable<any>{
+    return this.httpclient.get(`http://localhost:8080/api/customers/getCustomers/${id}`)
 }
 public create(tenant: IProduct): Observable<any> {
-    return this.httpclient.post<IProduct>('http://localhost:8080/api/product/addProducts', tenant, { observe: 'response' });
+    return this.httpclient.post<IProduct>('http://localhost:8080/api/customers/addCustomer', tenant, { observe: 'response' });
   }
  public delete(id: string): Observable<HttpResponse<any>> {
-    return this.httpclient.delete<any>(`http://localhost:8080/api/product/deleteProducts/${id}`, { observe: 'response' });
+    return this.httpclient.delete<any>(`http://localhost:8080/api/customers/deleteCustomers/${id}`, { observe: 'response' });
   }
 
 
