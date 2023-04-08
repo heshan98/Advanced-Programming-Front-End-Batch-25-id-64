@@ -10,7 +10,7 @@ import { FuseUtils } from '@fuse/utils';
 
 import { Product } from 'app/main/apps/e-commerce/product/product.model';
 import { EcommerceProductService } from 'app/main/apps/e-commerce/product/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { productsService } from 'app/main/services/product.service';
 import { IProduct } from 'app/main/services/models/product-model';
 import { MatDialog } from '@angular/material';
@@ -46,7 +46,8 @@ export class EcommerceProductComponent implements OnInit {
         protected activatedRoute: ActivatedRoute,
         public dialog: MatDialog,
         private _matSnackBar: MatSnackBar,
-        private productService: productsService
+        private productService: productsService,
+        private router:Router
     ) {
 
     }
@@ -94,6 +95,7 @@ export class EcommerceProductComponent implements OnInit {
 submit(){
     const submit=this.createFromForm();
 this.productService.create(submit).subscribe(res=>{
+    this.router.navigate(['/products' ]);
 
 })
 }
@@ -112,7 +114,7 @@ deleteProduct() {
        this.productService.delete(this.productId).subscribe(res=>{
         
        })
-
+       this.router.navigate(['/products' ]);
       }
       else {
         

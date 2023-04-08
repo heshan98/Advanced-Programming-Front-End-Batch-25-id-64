@@ -7,6 +7,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { IRegister, Register } from 'app/main/services/models/register-model';
 import { registerService } from 'app/main/services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector     : 'register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
-        private registerService:registerService
+        private registerService:registerService,
+        private router:Router
     )
     {
         // Configure the layout
@@ -87,7 +89,8 @@ export class RegisterComponent implements OnInit, OnDestroy
       submit(){
         const submit=this.createFromForm();
         this.registerService.create(submit).subscribe(res=>{
-
+            this.router.navigate(['/success' ]);
+           
         })
       }
 

@@ -17,6 +17,7 @@ import { ProductDeleteDialogBoxComponent } from './product-delete-dialog-box/pro
 import { RegisterComponent } from './authentication/register/register.component';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { SuccessComponent } from './authentication/success/success.component';
 
 @NgModule({
     imports: [
@@ -57,7 +58,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 
     ],
     
-    declarations: [ProductDeleteDialogBoxComponent, CustomerManagementComponent, CustomerDetailsComponent] ,
+    declarations: [ProductDeleteDialogBoxComponent, CustomerManagementComponent, CustomerDetailsComponent, SuccessComponent] ,
     entryComponents:[ProductDeleteDialogBoxComponent]
 
    

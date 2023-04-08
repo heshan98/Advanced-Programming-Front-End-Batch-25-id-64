@@ -30,8 +30,15 @@ public getCustomersById(id:any):Observable<any>{
 public create(tenant: IProduct): Observable<any> {
     return this.httpclient.post<IProduct>('http://localhost:8080/api/customers/addCustomer', tenant, { observe: 'response' });
   }
+  public update(tenant: IProduct): Observable<any> {
+    return this.httpclient.post<IProduct>('http://localhost:8080/api/customers/updateProducts', tenant, { observe: 'response' });
+  }
  public delete(id: string): Observable<HttpResponse<any>> {
     return this.httpclient.delete<any>(`http://localhost:8080/api/customers/deleteCustomers/${id}`, { observe: 'response' });
+  }
+  updateProduct(product: IProduct, id: number): Observable<any> {
+    const url = `${'http://localhost:8080/api/customers/updateCustomers/'}${id}`;
+    return this.httpclient.put(url, product);
   }
 
 

@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
                 const match = this.userService.roleMatch(role);
                 console.log(this.userService.roleMatch(role),'test')
                 console.log(match,'hi2')
-                if (match) {
+                if (match) { 
                     return true;
                 } else {
                     // this.router.navigate(['/authentication/login']);
