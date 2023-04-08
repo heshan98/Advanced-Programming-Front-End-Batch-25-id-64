@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { IRegister } from 'app/main/services/models/register-model';
+import { IRegister, Register } from 'app/main/services/models/register-model';
 import { registerService } from 'app/main/services/register.service';
 import * as moment from 'moment';
 import { ProductDeleteDialogBoxComponent } from '../product-delete-dialog-box/product-delete-dialog-box.component';
@@ -39,6 +39,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
+    private router:Router,
     private registerService:registerService,
     protected activatedRoute: ActivatedRoute,
     public dialog: MatDialog,) { }
@@ -56,7 +57,7 @@ this.editForm.patchValue({
   });
     
   }
-  updateForm(product: IRegister) {
+   updateForm(product: IRegister) {
 
     this.editForm.patchValue({
         id: product.id,
@@ -83,7 +84,7 @@ deleteProduct() {
        this.registerService.delete(this.id).subscribe(res=>{
         
        })
-
+       this.router.navigate(['/management/customers' ]);
       }
       else {
         
@@ -92,5 +93,22 @@ deleteProduct() {
 
     })
   }
+  private createFromForm(): IRegister {
+    return {
 
+      ...new Register(),
+     
+      name:this.editForm.get(['name']).value,
+      budget:this.editForm.get(['budget']).value,
+    
+     };
+  }
+
+save(){
+const subimit=this.createFromForm();
+    this.registerService.updateProduct(subimit,this.id).subscribe(res=>{
+
+    })
+    this.router.navigate(['/management/customers' ]);
+}
 }

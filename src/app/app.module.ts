@@ -46,6 +46,7 @@ import { EcommerceProductsComponent } from './main/apps/e-commerce/products/prod
 import { AnalyticsDashboardComponent } from './main/apps/dashboards/analytics/analytics.component';
 import { MatGridList, MatGridListModule } from '@angular/material';
 import { ProjectDashboardComponent } from './main/apps/dashboards/project/project.component';
+import { SuccessComponent } from './main/pages/authentication/success/success.component';
 
 const appRoutes: Routes = [
     {
@@ -79,7 +80,7 @@ const appRoutes: Routes = [
     {path:'product/:id',component:EcommerceProductComponent},
 
     {path:'products',component:EcommerceProductsComponent},
-
+    {path:'success',component:SuccessComponent},
    
 
 
@@ -122,7 +123,7 @@ const appRoutes: Routes = [
         AppComponent,
         LoginComponent,
         ProductDeleteDialogBoxComponent,
-     
+     SuccessComponent,
         RegisterComponent,
         CustomerManagementComponent,
         CustomerDetailsComponent,
